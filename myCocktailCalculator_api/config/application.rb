@@ -19,10 +19,6 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-config.generators do |g|
-  g.api_only = true
-end
-
 module MyCocktailCalculatorApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
