@@ -3,9 +3,9 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients
   def index
-    @ingredients = Ingredient.all
+    ingredients = Ingredient.all
 
-    render json: @ingredients
+    render json: ingredients
   end
 
   # GET /ingredients/1
@@ -36,6 +36,7 @@ class IngredientsController < ApplicationController
   # DELETE /ingredients/1
   def destroy
     @ingredient.destroy
+    render json: {message: 'Ingredient successfully deleted!'}
   end
 
   private

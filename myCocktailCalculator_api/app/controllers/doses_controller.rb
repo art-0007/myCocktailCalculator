@@ -3,9 +3,9 @@ class DosesController < ApplicationController
 
   # GET /doses
   def index
-    @doses = Dose.all
+    doses = Dose.all
 
-    render json: @doses
+    render json: doses
   end
 
   # GET /doses/1
@@ -15,6 +15,7 @@ class DosesController < ApplicationController
 
   # POST /doses
   def create
+    
     @dose = Dose.new(dose_params)
 
     if @dose.save
@@ -36,6 +37,7 @@ class DosesController < ApplicationController
   # DELETE /doses/1
   def destroy
     @dose.destroy
+    render json: {message: 'Dose successfully deleted!'}
   end
 
   private

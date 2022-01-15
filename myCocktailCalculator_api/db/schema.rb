@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_01_14_192514) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.boolean "liquid", default: false
-    t.integer "category_id", null: false
+    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_ingredients_on_category_id"

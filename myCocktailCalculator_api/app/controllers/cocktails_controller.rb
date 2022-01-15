@@ -3,9 +3,9 @@ class CocktailsController < ApplicationController
 
   # GET /cocktails
   def index
-    @cocktails = Cocktail.all
+    cocktails = Cocktail.all
 
-    render json: @cocktails
+    render json: cocktails
   end
 
   # GET /cocktails/1
@@ -36,6 +36,7 @@ class CocktailsController < ApplicationController
   # DELETE /cocktails/1
   def destroy
     @cocktail.destroy
+    render json: {message: 'Cocktail successfully deleted!'}
   end
 
   private
@@ -46,6 +47,6 @@ class CocktailsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cocktail_params
-      params.require(:cocktail).permit(:name, :description)
+      params.require(:cocktail).permit(:name, :description, ingredient_ids:[], ingredients_attributes: [:name, :liquid])
     end
 end

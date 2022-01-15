@@ -3,7 +3,7 @@ class CreateIngredients < ActiveRecord::Migration[6.1]
     create_table :ingredients do |t|
       t.string :name
       t.boolean :liquid, default: false
-      t.belongs_to :category, null: false, foreign_key: true
+      t.belongs_to :category, foreign_key: true
 
       t.timestamps
     end
