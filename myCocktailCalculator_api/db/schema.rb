@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2022_01_14_192514) do
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "cocktails", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -26,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_01_14_192514) do
   end
 
   create_table "doses", force: :cascade do |t|
-    t.integer "amount"
+    t.string "quantity"
     t.integer "cocktail_id"
     t.integer "ingredient_id"
     t.datetime "created_at", precision: 6, null: false
@@ -38,11 +32,8 @@ ActiveRecord::Schema.define(version: 2022_01_14_192514) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.boolean "liquid", default: false
-    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_ingredients_on_category_id"
   end
 
-  add_foreign_key "ingredients", "categories"
 end
