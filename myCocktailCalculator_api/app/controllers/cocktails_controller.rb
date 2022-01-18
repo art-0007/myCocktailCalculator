@@ -10,7 +10,18 @@ class CocktailsController < ApplicationController
 
   # GET /cocktails/1
   def show
-    render json: @cocktail
+    cocktail = Cocktail.find(params[:id])
+    doses = cocktail.doses
+
+    # render json: cocktail, include: [:doses, :ingredients], except: [:updated_at]
+
+    render json: cocktail.to_json(:include => {
+      :doses => {:only => [:quantity, :ingredient_id]},
+      :ingredients => {:only => [:name]}
+    }, :except => [:updated_at])
+    # { id: dose.id, quantity: dose.quantity , cocktail: dose.cocktail.name, ingredient: dose.ingredient.name }
+
+
   end
 
   # POST /cocktails

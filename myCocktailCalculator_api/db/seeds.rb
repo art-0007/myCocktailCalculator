@@ -44,7 +44,7 @@ Dose.create ([
     {quantity: '50', cocktail_id: espresso_martini.id, ingredient_id: coffee.id},
     {quantity: '50', cocktail_id: espresso_martini.id, ingredient_id: coffee_liqueur.id},
     {quantity: '2 oranges , chopped', cocktail_id: easy_sangria.id, ingredient_id: orange.id},
-    {quantity: '2 lemons , 1 chopped, 1 juiced', cocktail_id: mojito.id, ingredient_id: lemon.id},
+    {quantity: '2 lemons , 1 chopped, 1 juiced', cocktail_id: easy_sangria.id, ingredient_id: lemon.id},
     {quantity: '750', cocktail_id: easy_sangria.id, ingredient_id: red_wine.id},
     {quantity: '100', cocktail_id: easy_sangria.id, ingredient_id: spanish_brandy.id},
     {quantity: '300', cocktail_id: easy_sangria.id, ingredient_id: sparkling_water.id},

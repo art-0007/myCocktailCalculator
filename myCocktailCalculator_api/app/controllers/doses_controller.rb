@@ -10,7 +10,8 @@ class DosesController < ApplicationController
 
   # GET /doses/1
   def show
-    render json: @dose
+    dose = Dose.find(params[:id])
+    render json: { id: dose.id, quantity: dose.quantity , cocktail: dose.cocktail.name, ingredient: dose.ingredient.name }
   end
 
   # POST /doses
