@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2022_01_14_192514) do
   create_table "cocktails", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "img"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

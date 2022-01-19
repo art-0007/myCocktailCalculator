@@ -26,6 +26,7 @@ class CocktailsController < ApplicationController
 
   # POST /cocktails
   def create
+    binding.pry
     @cocktail = Cocktail.new(cocktail_params)
 
     if @cocktail.save
@@ -58,6 +59,6 @@ class CocktailsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cocktail_params
-      params.require(:cocktail).permit(:name, :description)
+      params.require(:cocktail).permit(:name, :description, :img)
     end
 end
