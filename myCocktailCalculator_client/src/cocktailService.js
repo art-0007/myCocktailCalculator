@@ -19,6 +19,18 @@ class CocktailService{
         })
     }
 
+    cocktailShow() {
+        const id = event.target.dataset.id
+
+        fetch(`${cocktailService.endpoint}/cocktails/${id}`)
+        .then(resp => resp.json())
+        .then(cocktail => {
+            debugger;
+            Cocktail.cocktailsContainer.innerHTML = ''
+            Cocktail.cocktailForm.innerHTML = ''
+        })
+     }
+
 
     createCocktail() {
         const cocktail = {
