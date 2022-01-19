@@ -26,7 +26,7 @@ class CocktailsController < ApplicationController
 
   # POST /cocktails
   def create
-    binding.pry
+    #binding.pry
     @cocktail = Cocktail.new(cocktail_params)
 
     if @cocktail.save

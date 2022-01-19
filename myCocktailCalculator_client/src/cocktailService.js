@@ -20,6 +20,7 @@ class CocktailService{
     }
 
     cocktailShow() {
+        debugger;
         const id = event.target.dataset.id
 
         fetch(`${cocktailService.endpoint}/cocktails/${id}`)
@@ -29,7 +30,20 @@ class CocktailService{
             Cocktail.cocktailsContainerClear()
             Cocktail.cocktailFormClear()
             Cocktail.renderCocktail(cocktail)
+
+            Cocktail.cocktailsContainer.innerHTML += `
+                <a id="back-bttn" href="#">Back</a>
+            `
+
+            const backBttn = document.getElementById("back-bttn")
+           backBttn.addEventListener('click', cocktailService.goBack)    
         })
+     }
+
+     goBack() {
+        Cocktail.cocktailsContainerClear()
+        Cocktail.renderForm()
+        cocktailService.getCocktails() 
      }
 
 
@@ -65,6 +79,9 @@ class CocktailService{
         })
         .then(resp => resp.json())
         .then(json =>{alert(json.message)})
+        Cocktail.cocktailsContainerClear()
+        cocktailService.getCocktails()
     }
+    
 
 }

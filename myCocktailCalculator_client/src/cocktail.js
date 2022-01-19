@@ -23,20 +23,16 @@ class Cocktail {
 
         cocktailHTML() {
             this.element.innerHTML += `
-                <div>
+                <div class="center">
                     <h3>${this.name}</h3>
                     <img data-id=${this.id} class="cocktail-img" src="${this.img}" alt="${this.name}" width="100" height="100">
                     <p>${this.description}</p>   
-                </div>
+                
                 <button id='delete-bttn'>Delete</button>
+                </div>
                 <br>
                 <br>
             `
-            const cocktailImgs = document.getElementsByClassName("cocktail-img")
-            for (const img of cocktailImgs) {
-                img.addEventListener('click', cocktailService.cocktailShow)
-            }
-
             return this.element   
         }
 
@@ -78,7 +74,7 @@ class Cocktail {
         static renderCocktail(cocktail) {
             // debugger;
             Cocktail.cocktailsContainer.innerHTML += `
-                <div>
+                <div class="center">
                     <h1>${cocktail.name}</h1>
                     <img data-id=${cocktail.id} class="cocktail-img" src="${cocktail.img}" alt="${cocktail.name}" width="400" height="400">
                     <p>${cocktail.description}</p>   
@@ -109,8 +105,11 @@ class Cocktail {
 
 
         handleClick = () => {
+            //debugger;
             if (event.target.innerText === "Delete") {
                 cocktailService.deleteCocktail(this.id)
+            } else if (event.target.className === "cocktail-img") {
+                cocktailService.cocktailShow()
             }
         }
 
