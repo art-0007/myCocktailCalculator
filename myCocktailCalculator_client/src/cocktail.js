@@ -67,6 +67,46 @@ class Cocktail {
             `
         }
 
+        static cocktailsContainerClear() {
+            Cocktail.cocktailsContainer.innerHTML = ''
+        }
+
+        static cocktailFormClear() {
+            Cocktail.cocktailForm.innerHTML = ''
+        }
+
+        static renderCocktail(cocktail) {
+            // debugger;
+            Cocktail.cocktailsContainer.innerHTML += `
+                <div>
+                    <h1>${cocktail.name}</h1>
+                    <img data-id=${cocktail.id} class="cocktail-img" src="${cocktail.img}" alt="${cocktail.name}" width="400" height="400">
+                    <p>${cocktail.description}</p>   
+                </div>
+            `
+            Cocktail.renderIngredients(cocktail)
+        }
+
+        static renderIngredients(cocktail) {
+            // debugger;
+            cocktail.doses.forEach(q => {
+                Cocktail.cocktailsContainer.innerHTML += `
+                <div>
+                <h4>${q.quantity}</h4>
+                </div>
+                `    
+            })
+            cocktail.ingredients.forEach(i => {
+                Cocktail.cocktailsContainer.innerHTML += `
+                <div>
+                <h4>of ${i.name}</h4>
+                </div>
+                ` 
+            })
+        }
+
+        
+
 
         handleClick = () => {
             if (event.target.innerText === "Delete") {

@@ -25,9 +25,10 @@ class CocktailService{
         fetch(`${cocktailService.endpoint}/cocktails/${id}`)
         .then(resp => resp.json())
         .then(cocktail => {
-            debugger;
-            Cocktail.cocktailsContainer.innerHTML = ''
-            Cocktail.cocktailForm.innerHTML = ''
+            // debugger;
+            Cocktail.cocktailsContainerClear()
+            Cocktail.cocktailFormClear()
+            Cocktail.renderCocktail(cocktail)
         })
      }
 
