@@ -20,7 +20,7 @@ class CocktailService{
     }
 
     cocktailShow() {
-        debugger;
+        //debugger;
         const id = event.target.dataset.id
 
         fetch(`${cocktailService.endpoint}/cocktails/${id}`)
