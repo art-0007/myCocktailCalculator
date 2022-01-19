@@ -85,20 +85,15 @@ class Cocktail {
 
         static renderIngredients(cocktail) {
             // debugger;
-            cocktail.doses.forEach(q => {
+            cocktail.doses.forEach(d => {
                 Cocktail.cocktailsContainer.innerHTML += `
-                <div>
-                <h4>${q.quantity}</h4>
-                </div>
+                <li>
+                <h4>${d.quantity} (action/ml) of ${Ingredient.all.find(i => i.id === d.ingredient_id).name} </h4>
+                </li>
                 `    
             })
-            cocktail.ingredients.forEach(i => {
-                Cocktail.cocktailsContainer.innerHTML += `
-                <div>
-                <h4>of ${i.name}</h4>
-                </div>
-                ` 
-            })
+
+            Ingredient.renderNewIngrForm(cocktail)
         }
 
         

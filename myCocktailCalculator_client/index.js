@@ -8,7 +8,7 @@ const ingredientService = new IngredientService(base_url)
 // any initializations of the application
 
  Cocktail.cocktailForm.addEventListener('submit', handleSubmit)
- 
+ Ingredient.ingredientForm.addEventListener('submit', handleIngrSubmit)
 
  
     cocktailService.getCocktails()
@@ -24,3 +24,10 @@ const ingredientService = new IngredientService(base_url)
          cocktailService.createCocktail()
          event.target.reset()
     }
+
+    function handleIngrSubmit() {
+        debugger;
+        event.preventDefault()
+        // cocktailService.createCocktail()
+        event.target.reset()
+   }
