@@ -26,8 +26,7 @@ const ingredientService = new IngredientService(base_url)
     }
 
     function handleIngrSubmit() {
-        debugger;
         event.preventDefault()
-        // cocktailService.createCocktail()
+        doseService.createDose()
         event.target.reset()
    }

@@ -33,10 +33,14 @@ class CocktailService{
 
             Cocktail.cocktailsContainer.innerHTML += `
                 <a id="back-bttn" href="#">Back</a>
+                <button type="button" id="calculator-bttn">Calculate a Party</button>
             `
-
+            
             const backBttn = document.getElementById("back-bttn")
-           backBttn.addEventListener('click', cocktailService.goBack)    
+            const calculatorBttn = document.getElementById("calculator-bttn")
+           backBttn.addEventListener('click', cocktailService.goBack)
+           calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)  
+            
         })
      }
 

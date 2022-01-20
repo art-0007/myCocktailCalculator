@@ -16,13 +16,17 @@ class DosesController < ApplicationController
 
   # POST /doses
   def create
+    # binding.pry
+    dose = Dose.new(dose_params)
+    if (params[:ingredient_name] != "")
+      ingredient = Ingredient.create(name: params[:ingredient_name], liquid: params[:liquid])
+      dose.ingredient_id = ingredient.id
+    end
     
-    @dose = Dose.new(dose_params)
-
-    if @dose.save
-      render json: @dose, status: :created, location: @dose
+    if dose.save
+      render json: dose, status: :created, location: dose
     else
-      render json: @dose.errors, status: :unprocessable_entity
+      render json: dose.errors, status: :unprocessable_entity
     end
   end
 
