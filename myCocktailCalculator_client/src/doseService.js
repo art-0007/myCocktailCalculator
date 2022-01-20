@@ -44,8 +44,7 @@ class DoseService {
         fetch(`${this.endpoint}/doses`, configObj)
         .then(resp => resp.json())
         .then(dose => {
-            // debugger;
-            // const d = new Dose(dose)
+            const d = new Dose(dose)
         })  
     }
 

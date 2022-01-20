@@ -33,7 +33,7 @@ class CocktailService{
 
             Cocktail.cocktailsContainer.innerHTML += `
                 <a id="back-bttn" href="#">Back</a>
-                <button type="button" id="calculator-bttn">Calculate a Party</button>
+                <button type="button" id="calculator-bttn">Create a Party Calculator</button>
             `
             
             const backBttn = document.getElementById("back-bttn")

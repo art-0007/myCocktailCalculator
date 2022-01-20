@@ -9,6 +9,7 @@ const ingredientService = new IngredientService(base_url)
 
  Cocktail.cocktailForm.addEventListener('submit', handleSubmit)
  Ingredient.ingredientForm.addEventListener('submit', handleIngrSubmit)
+ Calculator.calculatorForm.addEventListener('submit', handleCalcSubmit)
 
  
     cocktailService.getCocktails()
@@ -30,3 +31,9 @@ const ingredientService = new IngredientService(base_url)
         doseService.createDose()
         event.target.reset()
    }
+
+   function handleCalcSubmit() {
+    event.preventDefault()
+    Calculator.calculateParty()
+    event.target.reset()
+}
