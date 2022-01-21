@@ -44,7 +44,11 @@ class DoseService {
         fetch(`${this.endpoint}/doses`, configObj)
         .then(resp => resp.json())
         .then(dose => {
+            
             const d = new Dose(dose)
+            const id = d.cocktail_id
+            cocktailService.cocktailShow(id)
+            
         })  
     }
 

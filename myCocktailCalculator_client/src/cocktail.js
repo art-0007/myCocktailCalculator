@@ -84,7 +84,7 @@ class Cocktail {
         }
 
         static renderIngredients(cocktail) {
-            // debugger;
+        
             cocktail.doses.forEach(d => {
                 Cocktail.cocktailsContainer.innerHTML += `
                 <li>
@@ -104,7 +104,8 @@ class Cocktail {
             if (event.target.innerText === "Delete") {
                 cocktailService.deleteCocktail(this.id)
             } else if (event.target.className === "cocktail-img") {
-                cocktailService.cocktailShow()
+                const id = event.target.dataset.id
+                cocktailService.cocktailShow(id)
             }
         }
 

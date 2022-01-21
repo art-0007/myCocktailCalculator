@@ -3,9 +3,11 @@ class Dose {
     static dosesContainer = document.getElementById("doses-container")
     static doseForm = document.getElementById("new-dose-form")
 
-    constructor({id, quantity, cocktail_id, ingredient_id }) {
+    constructor({id, quantity, cocktail_id, ingredient_id, cocktail, ingredient}) {
         this.id = id
         this.quantity = quantity
+        this.cocktail = cocktail
+        this.ingredient = ingredient
         this.cocktail_id = cocktail_id
         this.ingredient_id = ingredient_id
 

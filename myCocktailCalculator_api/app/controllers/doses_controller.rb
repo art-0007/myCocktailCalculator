@@ -5,7 +5,7 @@ class DosesController < ApplicationController
   def index
     doses = Dose.all
 
-    render json: doses
+    render json: doses, include: [:cocktail, :ingredient], except: [:updated_at]
   end
 
   # GET /doses/1
@@ -24,7 +24,7 @@ class DosesController < ApplicationController
     end
     
     if dose.save
-      render json: dose, status: :created, location: dose
+      render json: dose, include: [:cocktail, :ingredient], except: [:updated_at], status: :created, location: dose
     else
       render json: dose.errors, status: :unprocessable_entity
     end

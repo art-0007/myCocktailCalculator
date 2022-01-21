@@ -19,9 +19,8 @@ class CocktailService{
         })
     }
 
-    cocktailShow() {
-        //debugger;
-        const id = event.target.dataset.id
+    cocktailShow(id) {
+        // const id = event.target.dataset.id
 
         fetch(`${cocktailService.endpoint}/cocktails/${id}`)
         .then(resp => resp.json())
@@ -39,7 +38,7 @@ class CocktailService{
             const backBttn = document.getElementById("back-bttn")
             const calculatorBttn = document.getElementById("calculator-bttn")
            backBttn.addEventListener('click', cocktailService.goBack)
-           calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)  
+           calculatorBttn.addEventListener('click', Calculator.create(id))  
             
         })
      }
@@ -82,9 +81,11 @@ class CocktailService{
             }
         })
         .then(resp => resp.json())
-        .then(json =>{alert(json.message)})
+        .then(json =>{alert(json.message)
         Cocktail.cocktailsContainerClear()
         cocktailService.getCocktails()
+        })
+        
     }
     
 

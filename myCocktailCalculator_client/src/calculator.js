@@ -1,11 +1,14 @@
 class Calculator {
     static all = []
     static calculatorForm = document.getElementById("calculator-form")
+    static tableForm = document.getElementById("calculator-table")
     static calculatorContainer = document.getElementById("calculator-container")
+    static calculatorResult = document.getElementById("calculator-result")
 
-    constructor({cocktail, ingrName, volume, price, abv, persons, cocktPerPers}) {
+
+    constructor({cocktail, dose, volume=500, price=0, abv=0, persons=1, cocktPerPers=1}) {
         this.cocktail = cocktail
-        this.ingrName = ingrName
+        this.dose = dose
         this.volume = volume
         this.price = price
         this.abv = abv
@@ -16,26 +19,52 @@ class Calculator {
 
     }
 
+    static create(id) {
+      const cocktail = Cocktail.all.find(c => c.id == id)
+      const cocktail_name = cocktail.name
+      const filteredDoses = Dose.all.filter(dose => dose.cocktail_id == id && dose.ingredient.liquid === true)
+     
+        filteredDoses.forEach(dose => {
+          const data = {
+            cocktail: cocktail_name,
+            dose: dose 
+          }
+          new Calculator(data)
+        })
+
+      Calculator.renderCalculatorForm()
+
+    }
+
     static renderCalculatorForm() {
-        // debugger;
-        Calculator.calculatorForm.innerHTML += `
-    <table style="width:100%">
+      
+        Calculator.tableForm.innerHTML += `
+    
         <tr>
           <th>Cocktail Name</th>
           <th>Ingredient Name</th>
           <th>Bottle volume</th>
           <th>Bottle price</th>
           <th>Alcohol by volume (ABV)</th>
-        </tr>
-        <tr>
-          <td><select id='cockt-calc-name'><option>test</option></select></td>
-          <td><select id='ing-calc-name'><option>test</option></select></td>
-          <td><input type="number" id='volume'></td>
-          <td><input type="number" id='price'></td>
-          <td><input type="number" id='abv'></td>
-        </tr>
+        </tr> 
+           
+         `
+         Calculator.all.forEach(c => {
+           
+            Calculator.tableForm.innerHTML += `
+            
+            <tr class ="dose-table-box">
+              <td><input type="text" id='cockt-name-${c.dose.id}' value = "${c.cocktail}" ></td>
+              <td><input type="text" id='cockingr-name-${c.dose.ingredient_id}' value = "${c.dose.ingredient.name}" ></td>
+              <td><input type="number" id='volume-${c.dose.ingredient_id}'></td>
+              <td><input type="number" id='price-${c.dose.ingredient_id}'></td>
+              <td><input type="number" id='abv-${c.dose.ingredient_id}'></td>
+            </tr>  
+            `
+        })
+
+        Calculator.calculatorForm.innerHTML += `
         
-      </table>
       
       <table style="width:50%">
         <tr>
@@ -46,110 +75,104 @@ class Calculator {
           <td><input type="number" id='coct-by-pers'></td>
         </tr>  
       </table>
+      
 
     <section>
         <p> <button type="submit">Calculate the Party</button> </p>
     </section>
-         `
-         Calculator.addIngrsToCalculator()
-         Calculator.addCocktsToCalculator()
-
+        `
     }
     
     static calculateParty() {
-        
-        const data = {
-            cocktail: document.getElementById("cockt-calc-name").value,
-            ingrName: document.getElementById("ing-calc-name").value,
-            volume: document.getElementById("volume").value,
-            price: document.getElementById("price").value,
-            abv: document.getElementById("abv").value,
-            persons: document.getElementById("persons").value,
-            cocktPerPers: document.getElementById("coct-by-pers").value   
-        }
-        
-        const party = new Calculator(data)
-        Calculator.renderResultData(party)
+      
+        Calculator.all.forEach(cdose => {
+         
+          cdose.volume = document.getElementById(`volume-${cdose.dose.ingredient_id}`).value
+          cdose.price = document.getElementById(`price-${cdose.dose.ingredient_id}`).value
+          cdose.abv = document.getElementById(`abv-${cdose.dose.ingredient_id}`).value
+          cdose.persons = document.getElementById("persons").value
+          cdose.cocktPerPers = document.getElementById("coct-by-pers").value
+        })
+              
+        Calculator.renderResultData()
         
     }
 
-    static totalBottles(party) {
-        const ingredient_id = Ingredient.all.find(i => i.name === party.ingrName).id
-        const cocktail_id = Cocktail.all.find(c => c.name === party.cocktail).id
-        const dose_quantity = Dose.all.find(d => d.cocktail_id === cocktail_id && d.ingredient_id === ingredient_id).quantity 
-        const total = parseInt(dose_quantity) * parseInt(party.cocktPerPers) * parseInt(party.persons)
-        const result = Math.ceil(total/parseInt(party.volume))
+    static totalBottles(cDose) { 
+      
+        const total = parseInt(cDose.dose.quantity) * parseInt(cDose.cocktPerPers) * parseInt(cDose.persons)
+        const result = Math.ceil(total/parseInt(cDose.volume))
+        
         return result
 
     }
 
-    static totalPrise(party) {
-        const total_price = Calculator.totalBottles(party) * parseInt(party.price)
+    static totalPrise(cDose) {
+      // debugger;
+        const total_price = Calculator.totalBottles(cDose) * parseInt(cDose.price)
         return total_price
     }
 
-    static costPerPerson(party) {
-        const cost_per_person = Calculator.totalPrise(party)/parseInt(party.persons)
+    static costPerPerson(cDose) {
+      // debugger;
+        const cost_per_person = Calculator.totalPrise(cDose)/parseInt(cDose.persons)
         return cost_per_person
     }
 
-    static renderResultData(party) {
+    static renderResultData() {
+        let total_price = 0
+        let price_per_person = 0
+        let cocktailName = Calculator.all[0].coctail
+
         
-        Calculator.calculatorContainer.innerHTML += `
-        <fieldset>
-        <table style="width:100%">
+        Calculator.calculatorResult.innerHTML += ` 
         <tr>
           <th>Total of Bottles</th>
           <th>Total price</th>
           <th>Cost per person</th>
         </tr>
-        <tr>
-          <td id="total-bottles">result</td>
-          <td id="total-price">result</td>
-          <td id="cost-per-person">result</td>
-        </tr>
-        
-      </table>
-      </fieldset>
         `
+
+        Calculator.all.forEach(cDose => {
+        const ingrId =  cDose.dose.ingredient_id 
+        const total_btl = Calculator.totalBottles(cDose)
+        const total_prc = Calculator.totalPrise(cDose) 
+        const cost_per_per = Calculator.costPerPerson(cDose)
+        total_price += total_prc
+        price_per_person += cost_per_per
+
+        Calculator.calculatorResult.innerHTML += `
+        <tr>
+          <td id="total-bottles-${cDose.dose.ingredient_id}">result</td>
+          <td id="total-price-${cDose.dose.ingredient_id}">result</td>
+          <td id="cost-per-person-${cDose.dose.ingredient_id}">result</td>
+        </tr>
+        `
+        Calculator.addOnDom(ingrId, total_btl, total_prc, cost_per_per)
         
-        const total_btl = Calculator.totalBottles(party)
-        const total_prc = Calculator.totalPrise(party) 
-        const cost_per_per = Calculator.costPerPerson(party)
-        
-        Calculator.addOnDom(total_btl, total_prc, cost_per_per)
+        })
+        setTimeout(() => { alert(`Full cost of the cocktail for the Party is: ${total_price} dollars! Price per person is: ${price_per_person} dollars. `);
+      },2000)
+          
     }
 
-    static addOnDom(total_btl, total_prc, cost_per_per) {
-        debugger;
-        const total_of_bottles = document.getElementById("total-bottles")
-        const total_price = document.getElementById("total-price")
-        const cost_per_pers = document.getElementById("cost-per-person")
+    static addOnDom(ingrId, total_btl, total_prc, cost_per_per) {
+        const total_of_bottles = document.getElementById(`total-bottles-${ingrId}`)
+        const total_price = document.getElementById(`total-price-${ingrId}`)
+        const cost_per_pers = document.getElementById(`cost-per-person-${ingrId}`)
         total_of_bottles.innerHTML = total_btl
         total_price.innerHTML = total_prc
         cost_per_pers.innerHTML = cost_per_per
 
     }
 
-    static addIngrsToCalculator() {
+    static addIngrsToCalculator(doses) {
         const dropDownIngr  = document.getElementById("ing-calc-name")
-        Ingredient.all.forEach(ing => {
-         dropDownIngr.innerHTML += `
-             <option id="exist-ingr-${ing.id}">
-             ${ing.name}
-             </option>
-         `
-        })
-         
-     }
 
-     static addCocktsToCalculator() {
-        //  debugger;
-        const dropDownCockts  = document.getElementById("cockt-calc-name")
-        Cocktail.all.forEach(c => {
-            dropDownCockts.innerHTML += `
-             <option id="exist-cockt-${c.id}">
-             ${c.name}
+        doses.forEach(dose => {
+         dropDownIngr.innerHTML += `
+             <option id="exist-ingr-${dose.id}">
+             ${dose.ingredient.name}
              </option>
          `
         })
