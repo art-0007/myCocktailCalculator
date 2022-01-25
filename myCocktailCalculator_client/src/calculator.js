@@ -20,6 +20,7 @@ class Calculator {
     }
 
     static create(id) {
+      Calculator.all =[]
       const cocktail = Cocktail.all.find(c => c.id == id)
       const cocktail_name = cocktail.name
       const filteredDoses = Dose.all.filter(dose => dose.cocktail_id == id && dose.ingredient.liquid === true)
@@ -32,12 +33,15 @@ class Calculator {
           new Calculator(data)
         })
 
-      Calculator.renderCalculatorForm()
 
     }
 
+    static tableFormClear() {
+      Calculator.tableForm.innerHTML = ''
+    }
+
     static renderCalculatorForm() {
-      
+      debugger;
         Calculator.tableForm.innerHTML += `
     
         <tr>

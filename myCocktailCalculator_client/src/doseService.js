@@ -47,6 +47,7 @@ class DoseService {
             
             const d = new Dose(dose)
             const id = d.cocktail_id
+            ingredientService.getIngredients()
             cocktailService.cocktailShow(id)
             
         })  

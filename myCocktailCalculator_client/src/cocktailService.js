@@ -28,25 +28,25 @@ class CocktailService{
             // debugger;
             Cocktail.cocktailsContainerClear()
             Cocktail.cocktailFormClear()
+            Ingredient.NewIngrFormClear() 
             Cocktail.renderCocktail(cocktail)
+            Calculator.create(id)
+            Ingredient.renderNewIngrForm(cocktail)
 
             Cocktail.cocktailsContainer.innerHTML += `
                 <a id="back-bttn" href="#">Back</a>
                 <button type="button" id="calculator-bttn">Create a Party Calculator</button>
             `
-            
             const backBttn = document.getElementById("back-bttn")
             const calculatorBttn = document.getElementById("calculator-bttn")
            backBttn.addEventListener('click', cocktailService.goBack)
-           calculatorBttn.addEventListener('click', Calculator.create(id))  
+           calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)  
             
         })
      }
 
      goBack() {
-        Cocktail.cocktailsContainerClear()
-        Cocktail.renderForm()
-        cocktailService.getCocktails() 
+        location.reload(); 
      }
 
 
@@ -83,7 +83,7 @@ class CocktailService{
         .then(resp => resp.json())
         .then(json =>{alert(json.message)
         Cocktail.cocktailsContainerClear()
-        cocktailService.getCocktails()
+        location.reload();
         })
         
     }

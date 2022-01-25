@@ -93,7 +93,7 @@ class Cocktail {
                 `    
             })
 
-            Ingredient.renderNewIngrForm(cocktail)
+            // Ingredient.renderNewIngrForm(cocktail)
         }
 
         

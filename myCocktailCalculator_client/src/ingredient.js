@@ -17,6 +17,10 @@ class Ingredient {
 
     }
 
+    static NewIngrFormClear() {
+      Ingredient.ingredientForm.innerHTML = ''
+  }
+
     static renderNewIngrForm(cocktail) {
         Ingredient.ingredientForm.innerHTML += `
         <section>
