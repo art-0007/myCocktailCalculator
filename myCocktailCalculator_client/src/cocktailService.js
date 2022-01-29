@@ -21,8 +21,8 @@ class CocktailService{
 
     cocktailShow(id) {
         // const id = event.target.dataset.id
-
-        fetch(`${cocktailService.endpoint}/cocktails/${id}`)
+        debugger;
+        fetch(`${this.endpoint}/cocktails/${id}`)
         .then(resp => resp.json())
         .then(cocktail => {
             // debugger;

@@ -72,7 +72,7 @@ class Cocktail {
         }
 
         static renderCocktail(cocktail) {
-            // debugger;
+    
             Cocktail.cocktailsContainer.innerHTML += `
                 <div class="center">
                     <h1>${cocktail.name}</h1>
@@ -104,8 +104,9 @@ class Cocktail {
             if (event.target.innerText === "Delete") {
                 cocktailService.deleteCocktail(this.id)
             } else if (event.target.className === "cocktail-img") {
-                const id = event.target.dataset.id
-                cocktailService.cocktailShow(id)
+                // debugger;
+                // this.cocktailShow()
+                cocktailService.cocktailShow(this.id)
             }
         }
 

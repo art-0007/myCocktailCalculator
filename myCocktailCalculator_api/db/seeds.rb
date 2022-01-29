@@ -31,13 +31,6 @@ easy_sangria = Cocktail.create({name: 'Easy sangria', description: 'Embrace balm
 mudslide = Cocktail.create({name: 'Mudslide', description: 'Share this creamy adults-only drink with the chocolate lover in your life. For extra indulgence, grate over some chocolate before serving.', img: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/mudslide-b38f145.jpg?quality=90&resize=440,400"})
 sweet_manhattan = Cocktail.create({name: 'Sweet manhattan cocktail', description: 'If you are a whiskey lover, you all love this sweet manhattan, made with whiskey, vermouth and bitters. Serve with a maraschino cherry and a twist of lemon.', img: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/manhattan-cocktail-4d775c9.jpg?quality=90&webp=true&resize=440,400"})
 
-# mojito.img = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/mojito-cocktails-150961e.jpg?quality=90&resize=430,390"
-# sex_on_the_beach.img = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/sex_on_the_beach-621ae6e.jpg?quality=90&resize=440,400"
-# rhubarb_gin.img = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/rhubarb-gin-93e56de.jpg?quality=90&resize=440,400"
-# espresso_martini.img = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/espresso-martini-f099531.jpg?quality=90&resize=440,400"
-# easy_sangria.img = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/sangria-new-crop-8fbb7a1.jpg?quality=90&resize=440,400"
-# mudslide.img = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/mudslide-b38f145.jpg?quality=90&resize=440,400"
-# sweet_manhattan.img = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/manhattan-cocktail-4d775c9.jpg?quality=90&webp=true&resize=440,400"
 
 
 Dose.create ([
