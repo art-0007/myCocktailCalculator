@@ -19,31 +19,31 @@ class CocktailService{
         })
     }
 
-    cocktailShow(id) {
-        // const id = event.target.dataset.id
-        debugger;
-        fetch(`${this.endpoint}/cocktails/${id}`)
-        .then(resp => resp.json())
-        .then(cocktail => {
-            // debugger;
-            Cocktail.cocktailsContainerClear()
-            Cocktail.cocktailFormClear()
-            Ingredient.NewIngrFormClear() 
-            Cocktail.renderCocktail(cocktail)
-            Calculator.create(id)
-            Ingredient.renderNewIngrForm(cocktail)
+    // cocktailShow() {
+    //     // const id = event.target.dataset.id
+    //     debugger;
+    //     fetch(`${this.endpoint}/cocktails/${id}`)
+    //     .then(resp => resp.json())
+    //     .then(cocktail => {
+    //         // debugger;
+    //         Cocktail.cocktailsContainerClear()
+    //         Cocktail.cocktailFormClear()
+    //         Ingredient.NewIngrFormClear() 
+    //         Cocktail.renderCocktail(cocktail)
+    //         Calculator.create(id)
+    //         Ingredient.renderNewIngrForm(cocktail)
 
-            Cocktail.cocktailsContainer.innerHTML += `
-                <a id="back-bttn" href="#">Back</a>
-                <button type="button" id="calculator-bttn">Create a Party Calculator</button>
-            `
-            const backBttn = document.getElementById("back-bttn")
-            const calculatorBttn = document.getElementById("calculator-bttn")
-           backBttn.addEventListener('click', cocktailService.goBack)
-           calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)  
+    //         Cocktail.cocktailsContainer.innerHTML += `
+    //             <a id="back-bttn" href="#">Back</a>
+    //             <button type="button" id="calculator-bttn">Create a Party Calculator</button>
+    //         `
+    //         const backBttn = document.getElementById("back-bttn")
+    //         const calculatorBttn = document.getElementById("calculator-bttn")
+    //        backBttn.addEventListener('click', cocktailService.goBack)
+    //        calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)  
             
-        })
-     }
+    //     })
+    //  }
 
      goBack() {
         location.reload(); 
@@ -86,6 +86,10 @@ class CocktailService{
         location.reload();
         })
         
+    }
+
+    updateCocktail(id) {
+        debugger;
     }
     
 
