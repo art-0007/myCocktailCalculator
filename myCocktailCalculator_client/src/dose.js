@@ -20,4 +20,17 @@ class Dose {
 
     }
 
+    doseHTML() {
+        // debugger;
+        this.element.innerHTML += `
+        <h4>${this.quantity} (action/ml) of ${this.ingredient.name} </h4>
+        `
+        return this.element
+    }
+
+    slapDoseOnDom() {
+        // debugger;
+        Dose.dosesContainer.append(this.doseHTML())
+    }
+
 }

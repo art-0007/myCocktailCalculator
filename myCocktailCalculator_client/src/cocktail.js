@@ -22,7 +22,6 @@ class Cocktail {
     }
 
         cocktailHTML() {
-            // debugger;
             this.element.innerHTML += `
                 <div class="center">
                     <h3>${this.name}</h3>
@@ -49,6 +48,7 @@ class Cocktail {
             Ingredient.NewIngrFormClear()
             Cocktail.cocktailsContainer.append(this.element)
             Calculator.create(this.id)
+            this.renderIngredients()
 
             Cocktail.cocktailsContainer.innerHTML += `
                 <a id="back-bttn" href="#">Back</a>
@@ -59,7 +59,6 @@ class Cocktail {
 
            backBttn.addEventListener('click', cocktailService.goBack)
            calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)
-        //    debugger;
            
         }
 
@@ -93,36 +92,16 @@ class Cocktail {
             Cocktail.cocktailForm.innerHTML = ''
         }
 
-        static renderCocktail(cocktail) {
-    
-            Cocktail.cocktailsContainer.innerHTML += `
-                <div class="center">
-                    <h1>${cocktail.name}</h1>
-                    <img data-id=${cocktail.id} class="cocktail-img" src="${cocktail.img}" alt="${cocktail.name}" width="400" height="400">
-                    <p>${cocktail.description}</p>   
-                </div>
-            `
-            Cocktail.renderIngredients(cocktail)
-        }
-
-        static renderIngredients(cocktail) {
-        
-            cocktail.doses.forEach(d => {
-                Cocktail.cocktailsContainer.innerHTML += `
-                <li>
-                <h4>${d.quantity} (action/ml) of ${Ingredient.all.find(i => i.id === d.ingredient_id).name} </h4>
-                </li>
-                `    
-            })
-
-            // Ingredient.renderNewIngrForm(cocktail)
+        renderIngredients() {
+            const doses = Dose.all.filter(d => d.cocktail_id === this.id) 
+            doses.forEach(d =>  d.slapDoseOnDom() )
+            this.renderNewIngrForm()
         }
 
         
 
 
         handleClick = () => {
-            //debugger;
             if (event.target.innerText === "Delete") {
                 cocktailService.deleteCocktail(this.id)
             } else if (event.target.innerText === "Update") {
