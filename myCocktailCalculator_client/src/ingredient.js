@@ -21,7 +21,8 @@ class Ingredient {
       Ingredient.ingredientForm.innerHTML = ''
   }
 
-    static renderNewIngrForm(cocktail) {
+   static renderNewIngrForm() {
+
         Ingredient.ingredientForm.innerHTML += `
         <section>
         <h2>New Ingredients</h2>
@@ -37,7 +38,7 @@ class Ingredient {
         </p>
 
         <p>
-        <input type="hidden" id="ingrs-cocktail-Id" name="cocktail-Id" value=${cocktail.id}>
+        <input type="hidden" id="ingrs-cocktail-Id" name="cocktail-Id" value=${this.id}>
         </p>
 
         <p>
@@ -78,7 +79,8 @@ class Ingredient {
     }
 
 
-    static addIngrToDropdown() {
+   static addIngrToDropdown() {
+      debugger;
        const dropDownIngr  = document.getElementById("ingredients-dropdown")
        Ingredient.all.forEach(ing => {
         dropDownIngr.innerHTML += `

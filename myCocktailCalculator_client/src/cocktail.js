@@ -95,7 +95,8 @@ class Cocktail {
         renderIngredients() {
             const doses = Dose.all.filter(d => d.cocktail_id === this.id) 
             doses.forEach(d =>  d.slapDoseOnDom() )
-            this.renderNewIngrForm()
+        
+            Ingredient.renderNewIngrForm.call(this)
         }
 
         
