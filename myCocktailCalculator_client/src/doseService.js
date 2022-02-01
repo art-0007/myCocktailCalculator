@@ -48,7 +48,9 @@ class DoseService {
             const d = new Dose(dose)
             const id = d.cocktail_id
             ingredientService.getIngredients()
-            cocktailService.cocktailShow(id)
+            // const cocktail = Cocktail.all.find(c => d.cocktail_id === c.id)
+            // cocktail.cocktailShow()
+            d.slapDoseOnDom()
             
         })  
     }

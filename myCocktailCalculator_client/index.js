@@ -7,16 +7,17 @@ const ingredientService = new IngredientService(base_url)
 // any initializations of the application
 
  Cocktail.cocktailForm.addEventListener('submit', handleSubmit)
+ Cocktail.cocktailUpdateForm.addEventListener('submit', handleUpdateSubmit)
  Ingredient.ingredientForm.addEventListener('submit', handleIngrSubmit)
  Calculator.calculatorForm.addEventListener('submit', handleCalcSubmit)
 
  
-    cocktailService.getCocktails()
-    Cocktail.renderForm()
+     cocktailService.getCocktails()
+     Cocktail.renderForm()
 
-    doseService.getDoses()
+     doseService.getDoses()
 
-    ingredientService.getIngredients()
+     ingredientService.getIngredients()
 
 
     function handleSubmit() {
@@ -25,14 +26,20 @@ const ingredientService = new IngredientService(base_url)
          event.target.reset()
     }
 
-    function handleIngrSubmit() {
-        event.preventDefault()
-        doseService.createDose()
-        event.target.reset()
-   }
+     function handleIngrSubmit() {
+          event.preventDefault()
+          doseService.createDose()
+          event.target.reset()
+     }
 
-   function handleCalcSubmit() {
-    event.preventDefault()
-    Calculator.calculateParty()
-    event.target.reset()
-}
+     function handleCalcSubmit() {
+          event.preventDefault()
+          Calculator.calculateParty()
+          event.target.reset()
+     }
+
+     function handleUpdateSubmit() {
+          event.preventDefault()
+          cocktailService.updateCocktail()
+          event.target.reset()
+     }

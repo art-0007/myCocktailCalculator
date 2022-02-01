@@ -19,33 +19,7 @@ class CocktailService{
         })
     }
 
-    // cocktailShow() {
-    //     // const id = event.target.dataset.id
-    //     debugger;
-    //     fetch(`${this.endpoint}/cocktails/${id}`)
-    //     .then(resp => resp.json())
-    //     .then(cocktail => {
-    //         // debugger;
-    //         Cocktail.cocktailsContainerClear()
-    //         Cocktail.cocktailFormClear()
-    //         Ingredient.NewIngrFormClear() 
-    //         Cocktail.renderCocktail(cocktail)
-    //         Calculator.create(id)
-    //         Ingredient.renderNewIngrForm(cocktail)
-
-    //         Cocktail.cocktailsContainer.innerHTML += `
-    //             <a id="back-bttn" href="#">Back</a>
-    //             <button type="button" id="calculator-bttn">Create a Party Calculator</button>
-    //         `
-    //         const backBttn = document.getElementById("back-bttn")
-    //         const calculatorBttn = document.getElementById("calculator-bttn")
-    //        backBttn.addEventListener('click', cocktailService.goBack)
-    //        calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)  
-            
-    //     })
-    //  }
-
-     goBack() {
+     static goBack() {
         location.reload(); 
      }
 
@@ -73,6 +47,33 @@ class CocktailService{
         })  
     }
 
+    updateCocktail() {
+        
+        const id = document.getElementById("costail-update-Id").value
+        const cocktail = {
+            name: document.querySelector("#cocktail-update-name").value,
+            description: document.getElementById("cocktail-update-description").value,
+            img: document.getElementById("cocktail-update-image").value     
+        }
+
+        const configObj = {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(cocktail)
+        }
+
+        fetch(`${this.endpoint}/cocktails/${id}`, configObj)
+        .then(resp => resp.json())
+        .then(cocktail => {
+            const c = new Cocktail(cocktail)
+            c.slapOnDom()
+        })  
+    }
+
+
+
     deleteCocktail(id) {
         fetch(`${this.endpoint}/cocktails/${id}`, {
             method: 'DELETE',
@@ -86,10 +87,6 @@ class CocktailService{
         location.reload();
         })
         
-    }
-
-    updateCocktail(id) {
-        debugger;
     }
     
 
