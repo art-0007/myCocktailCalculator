@@ -6,7 +6,8 @@ class Calculator {
     static calculatorResult = document.getElementById("calculator-result")
 
 
-    constructor({cocktail, dose, volume=500, price=0, abv=0, persons=1, cocktPerPers=1}) {
+    constructor({id, cocktail, dose, volume=500, price=0, abv=0, persons=1, cocktPerPers=1}) {
+        this.id = id
         this.cocktail = cocktail
         this.dose = dose
         this.volume = volume
@@ -15,24 +16,27 @@ class Calculator {
         this.persons = persons
         this.cocktPerPers = cocktPerPers
 
+        this.element = document.createElement('tr')
+        this.element.dataset.id = this.id
+        this.element.id = `dose-table-row-${this.id}`
+
         Calculator.all.push(this)
 
     }
 
-    static create(id) {
+    static create() {
+     
       Calculator.all =[]
-      const cocktail = Cocktail.all.find(c => c.id == id)
-      const cocktail_name = cocktail.name
-      const filteredDoses = Dose.all.filter(dose => dose.cocktail_id == id && dose.ingredient.liquid === true)
+      const filteredDoses = Dose.all.filter(dose => dose.cocktail_id == this.id && dose.ingredient.liquid === true)
      
         filteredDoses.forEach(dose => {
           const data = {
-            cocktail: cocktail_name,
+            id: dose.id,
+            cocktail: dose.cocktail.name,
             dose: dose 
           }
           new Calculator(data)
         })
-
 
     }
 
@@ -40,9 +44,23 @@ class Calculator {
       Calculator.tableForm.innerHTML = ''
     }
 
-    static renderCalculatorForm() {
-      debugger;
-        Calculator.tableForm.innerHTML += `
+    calculatorFormHTML() {
+         this.element.innerHTML += `
+           <td><input type="text" id='cockt-name-${this.dose.id}' value = "${this.cocktail}" ></td>
+           <td><input type="text" id='cockingr-name-${this.dose.ingredient_id}' value = "${this.dose.ingredient.name}" ></td>
+           <td><input type="number" id='volume-${this.dose.ingredient_id}'></td>
+           <td><input type="number" id='price-${this.dose.ingredient_id}'></td>
+           <td><input type="number" id='abv-${this.dose.ingredient_id}'></td>
+         `
+         return this.element
+    }
+
+    slapCalculatorFormTableRow() {
+      Calculator.tableForm.append(this.calculatorFormHTML())
+    }
+
+    static addCalcFormTableFirstRow() {
+      Calculator.tableForm.innerHTML += `
     
         <tr>
           <th>Cocktail Name</th>
@@ -53,23 +71,10 @@ class Calculator {
         </tr> 
            
          `
-         Calculator.all.forEach(c => {
-           
-            Calculator.tableForm.innerHTML += `
-            
-            <tr class ="dose-table-box">
-              <td><input type="text" id='cockt-name-${c.dose.id}' value = "${c.cocktail}" ></td>
-              <td><input type="text" id='cockingr-name-${c.dose.ingredient_id}' value = "${c.dose.ingredient.name}" ></td>
-              <td><input type="number" id='volume-${c.dose.ingredient_id}'></td>
-              <td><input type="number" id='price-${c.dose.ingredient_id}'></td>
-              <td><input type="number" id='abv-${c.dose.ingredient_id}'></td>
-            </tr>  
-            `
-        })
+    }
 
-        Calculator.calculatorForm.innerHTML += `
-        
-      
+    static addCalcFormPartyInputRow () {
+      Calculator.calculatorForm.innerHTML += `  
       <table style="width:50%">
         <tr>
           <th>Number of persons</th>
@@ -85,6 +90,17 @@ class Calculator {
         <p> <button type="submit">Calculate the Party</button> </p>
     </section>
         `
+    }
+
+    static renderCalculatorForm() {
+
+      Calculator.addCalcFormTableFirstRow()
+  
+      Calculator.all.forEach(dose => dose.slapCalculatorFormTableRow())
+
+      Calculator.addCalcFormPartyInputRow()
+
+      
     }
     
     static calculateParty() {

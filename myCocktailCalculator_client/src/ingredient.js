@@ -80,7 +80,7 @@ class Ingredient {
 
 
    static addIngrToDropdown() {
-      debugger;
+  
        const dropDownIngr  = document.getElementById("ingredients-dropdown")
        Ingredient.all.forEach(ing => {
         dropDownIngr.innerHTML += `

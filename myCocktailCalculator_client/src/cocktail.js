@@ -47,7 +47,7 @@ class Cocktail {
             Cocktail.cocktailFormClear()
             Ingredient.NewIngrFormClear()
             Cocktail.cocktailsContainer.append(this.element)
-            Calculator.create(this.id)
+            Calculator.create.call(this)
             this.renderIngredients()
 
             Cocktail.cocktailsContainer.innerHTML += `
