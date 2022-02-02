@@ -43,26 +43,33 @@ class Cocktail {
             Cocktail.cocktailsContainer.append(this.cocktailHTML())
         }
 
-        cocktailShow() {
-            
-            Cocktail.cocktailsContainerClear()
-            Cocktail.cocktailFormClear()
-            Ingredient.NewIngrFormClear()
-            Cocktail.cocktailsContainer.append(this.element)
-            Calculator.create.call(this)
-            this.renderIngredients()
+        // cocktailShow(id) {
+        // //    debugger;
+        // Cocktail.cocktailsContainerClear()
+        // Cocktail.cocktailFormClear()
+        // Ingredient.NewIngrFormClear()
 
-            Cocktail.cocktailsContainer.innerHTML += `
-                <a id="back-bttn" href="#">Back</a>
-                <button type="button" id="calculator-bttn">Create a Party Calculator</button>
-            `
-            const backBttn = document.getElementById("back-bttn")
-            const calculatorBttn = document.getElementById("calculator-bttn")
+        // fetch(`${this.endpoint}/cocktails/${id}`)
+        // .then(resp => resp.json())
+        // .then(cocktail => {
+        //         const c = new Cocktail(cocktail)
+        //         c.slapOnDom()
+        //         Calculator.create.call(c)
+        //         c.renderIngredients()
+        
+        // })
 
-           backBttn.addEventListener('click', CocktailService.goBack)
-           calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)
+        //     Cocktail.cocktailsContainer.innerHTML += `
+        //         <a id="back-bttn" href="#">Back</a>
+        //         <button type="button" id="calculator-bttn">Create a Party Calculator</button>
+        //     `
+        //     const backBttn = document.getElementById("back-bttn")
+        //     const calculatorBttn = document.getElementById("calculator-bttn")
+
+        //    backBttn.addEventListener('click', CocktailService.goBack)
+        //    calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)
            
-        }
+        // }
 
         static renderForm() {
             
@@ -147,7 +154,7 @@ class Cocktail {
             } else if (event.target.innerText === "Update") {
                 Cocktail.renderUpdateCocktailForm(this.id)
             } else if (event.target.className === "cocktail-img") {
-                this.cocktailShow()
+                cocktailService.cocktailShow(this.id)
             }
         }
 

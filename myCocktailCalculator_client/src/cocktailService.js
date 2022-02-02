@@ -72,6 +72,34 @@ class CocktailService{
         })  
     }
 
+    cocktailShow(id) {
+        //    debugger;
+        Cocktail.cocktailsContainerClear()
+        Cocktail.cocktailFormClear()
+        Ingredient.NewIngrFormClear()
+
+        fetch(`${this.endpoint}/cocktails/${id}`)
+        .then(resp => resp.json())
+        .then(cocktail => {
+                const c = new Cocktail(cocktail)
+                c.slapOnDom()
+                Calculator.create.call(c)
+                c.renderIngredients()
+        
+        })
+
+            Cocktail.cocktailsContainer.innerHTML += `
+                <a id="back-bttn" href="#">Back</a>
+                <button type="button" id="calculator-bttn">Create a Party Calculator</button>
+            `
+            const backBttn = document.getElementById("back-bttn")
+            const calculatorBttn = document.getElementById("calculator-bttn")
+
+           backBttn.addEventListener('click', CocktailService.goBack)
+           calculatorBttn.addEventListener('click', Calculator.renderCalculatorForm)
+           
+        }
+
 
 
     deleteCocktail(id) {
